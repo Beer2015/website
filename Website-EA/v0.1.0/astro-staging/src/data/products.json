@@ -1,0 +1,147 @@
+{
+  "release": "Public Content Release v0.1.0",
+  "verified_on": "2026-10-16",
+  "publication_policy": "MQL5-published products only; do not promote internal development branches as released products",
+  "catalog": [
+    {
+      "slug": "smc-forge",
+      "name": "SMC Forge",
+      "type": "EA",
+      "distribution": "MARKET",
+      "mql5_id": 193733,
+      "market_url": "https://www.mql5.com/en/market/product/193733",
+      "published_version": "1.130",
+      "version_checked": "2026-10-16",
+      "price": {
+        "shown_at_check_usd": 145,
+        "policy": "Do not hardcode a price in public CTA; redirect to MQL5 for current price"
+      },
+      "features": [
+        "POI Reaction, Liquidity Sweep, FVG Retracement workflows",
+        "Direct / Confirm entry styles",
+        "Multi-timeframe context and OB/FVG/liquidity zones",
+        "Break-even, trailing, SL/TP and on-chart panel"
+      ],
+      "demo_30_day_status": "NOT_ACTIVE_ON_WEBSITE",
+      "source": "MQL5 Market product 193733"
+    },
+    {
+      "slug": "smc-signals-alert",
+      "name": "SMC Signals Alert",
+      "type": "INDICATOR",
+      "distribution": "FREE_VIA_MQL5",
+      "mql5_id": 176529,
+      "market_url": "https://www.mql5.com/en/market/product/176529",
+      "published_version": "4.5",
+      "version_checked": "2026-10-16",
+      "features": [
+        "Premium / Discount zones, OB, FVG",
+        "Pre-watch, Ready, Confirm signal stages",
+        "Visual context and push alerts",
+        "Some advanced Telegram features are Pro-only according to product description"
+      ],
+      "source": "MQL5 Market product 176529"
+    },
+    {
+      "slug": "candles-signals",
+      "name": "Candles Signals",
+      "type": "INDICATOR",
+      "distribution": "FREE_VIA_MQL5",
+      "mql5_id": 177240,
+      "market_url": "https://www.mql5.com/en/market/product/177240",
+      "published_version": "1.67",
+      "version_checked": "2026-10-16",
+      "features": [
+        "Pinbar, Engulfing, Hammer, Shooting Star",
+        "Morning Star, Evening Star and optional pattern groups",
+        "Strength / context filters",
+        "On-chart pattern zones and popup, push, Telegram alerts"
+      ],
+      "source": "MQL5 Market product 177240"
+    },
+    {
+      "slug": "ma-cross-signals",
+      "name": "MA Cross Signals",
+      "type": "INDICATOR",
+      "distribution": "FREE_VIA_MQL5",
+      "mql5_id": 174152,
+      "market_url": "https://www.mql5.com/en/market/product/174152",
+      "published_version": "1.16",
+      "version_checked": "2026-10-16",
+      "features": [
+        "Two customizable Moving Averages",
+        "Bullish/bearish crossover Buy/Sell markings",
+        "Selected-timeframe MA lines on the current chart",
+        "Optional arrow display"
+      ],
+      "source": "MQL5 Market product 174152"
+    }
+  ],
+  "research": {
+    "subject": "SMC Forge reference backtest",
+    "source_url": "https://www.mql5.com/en/blogs/post/776185",
+    "conditions": {
+      "symbol": "XAUUSD",
+      "from": "2026-01-01",
+      "to": "2026-08-30",
+      "initial_deposit_usd": 1000,
+      "lot": 0.01
+    },
+    "profiles": [
+      {
+        "name": "Balanced",
+        "profit_usd": 640.91,
+        "profit_factor": 2.94,
+        "drawdown_pct": 10.78,
+        "trades": 59,
+        "positive_months": 7,
+        "total_months": 8,
+        "preset_url": "https://c.mql5.com/6/1031/G5-A03_Balanced.set"
+      },
+      {
+        "name": "Aggressive",
+        "profit_usd": 1810.01,
+        "profit_factor": 1.35,
+        "drawdown_pct": 17.85,
+        "trades": 334,
+        "positive_months": 6,
+        "total_months": 8,
+        "preset_url": "https://c.mql5.com/6/1031/G3-B01_Aggressive.set"
+      },
+      {
+        "name": "High Frequency",
+        "profit_usd": 535.17,
+        "profit_factor": 1.15,
+        "drawdown_pct": 32.56,
+        "trades": 604,
+        "positive_months": 6,
+        "total_months": 8,
+        "preset_url": "https://c.mql5.com/6/1031/G4-A04_Frequency.set"
+      }
+    ],
+    "disclaimer": "Backtests are historical simulations, not live trading results or guarantees. Check compatibility between historical preset and current product version."
+  },
+  "content_links": [
+    {
+      "title": "More Profit or More Stability? What Do You Trade Away?",
+      "url": "https://www.mql5.com/en/blogs/post/776185"
+    },
+    {
+      "title": "SMC Signals Alert basic guide",
+      "url": "https://monkeyc07.github.io/SMC/"
+    },
+    {
+      "title": "MQL5 author profile",
+      "url": "https://www.mql5.com/en/users/monkeyc"
+    }
+  ],
+  "restricted": {
+    "demo_otp": false,
+    "demo_license": false,
+    "direct_ex5_download": false,
+    "coffee_payment": false,
+    "source_delivery": false,
+    "live_admin": false,
+    "public_deployment": false
+  }
+}

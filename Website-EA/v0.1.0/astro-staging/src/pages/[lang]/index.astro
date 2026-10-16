@@ -1,0 +1,10 @@
+---
+import preview from '../../data/preview.html?raw';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'vi' } }, { params: { lang: 'en' } }];
+}
+const lang = Astro.params.lang;
+const html = preview.replace("let language='vi';", `let language='${lang}';`);
+---
+<Fragment set:html={html} />
