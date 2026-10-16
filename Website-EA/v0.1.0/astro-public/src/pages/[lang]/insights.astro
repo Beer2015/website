@@ -1,0 +1,11 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { langs, forLang, links } from '../../lib/content.mjs';
+export function getStaticPaths(){return langs.map(lang=>({params:{lang}}));}
+const lang=Astro.params.lang;const t=forLang(lang);
+const urls=[links.research,links.smcGuide,links.author];
+---
+<SiteLayout lang={lang} title={`${t.nav.insights} | EA & Indicators`}>
+  <header class="page-header"><div class="container"><div class="eyebrow">RESEARCH & GUIDES</div><h1>{t.insightsTitle}</h1><p>{t.insightsIntro}</p></div></header>
+  <section class="section"><div class="container"><div class="article-grid">{t.articles.map((entry,i)=><article class="article-card"><small>{entry[0]}</small><h3>{entry[1]}</h3><a class="text-link" href={urls[i]} target="_blank" rel="noopener noreferrer">{entry[2]} ↗</a></article>)}</div></div></section>
+</SiteLayout>

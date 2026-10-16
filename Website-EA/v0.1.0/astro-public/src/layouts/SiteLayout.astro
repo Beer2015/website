@@ -1,0 +1,61 @@
+---
+import '../styles.css';
+import { forLang, path } from '../lib/content.mjs';
+
+const { lang = 'vi', title, description } = Astro.props;
+const t = forLang(lang);
+const location = Astro.url.pathname;
+const other = lang === 'vi' ? 'en' : 'vi';
+const translated = `/${other}${location.replace(/^\/(vi|en)/, '')}`;
+const nav = [
+  { label: t.nav.products, href: path(lang, 'products') },
+  { label: t.nav.research, href: path(lang, 'research') },
+  { label: t.nav.insights, href: path(lang, 'insights') },
+  { label: t.nav.support, href: path(lang, 'support') },
+];
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="description" content={description || t.heroDesc} />
+    <meta name="theme-color" content="#f8fbff" />
+    <title>{title || t.title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{lang === 'vi' ? 'Bỏ qua menu' : 'Skip navigation'}</a>
+    <div class="preview-strip">{t.preview}</div>
+    <header class="header">
+      <div class="container head-inner">
+        <a class="brand" href={path(lang)} aria-label="EA & Indicators">
+          <span class="brand-icon" aria-hidden="true">EA</span>
+          <span>EA <em>&</em> Indicators</span>
+        </a>
+        <nav class="nav" aria-label={lang === 'vi' ? 'Điều hướng chính' : 'Main navigation'}>
+          {nav.map(item => <a href={item.href} aria-current={location === item.href ? 'page' : undefined}>{item.label}</a>)}
+        </nav>
+        <div class="language" aria-label={lang === 'vi' ? 'Ngôn ngữ' : 'Language'}>
+          <a class={lang === 'vi' ? 'active' : ''} href={lang === 'vi' ? location : translated} aria-current={lang === 'vi' ? 'page' : undefined}>VI</a>
+          <a class={lang === 'en' ? 'active' : ''} href={lang === 'en' ? location : translated} aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
+        </div>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="footer">
+      <div class="container footer-main">
+        <div>
+          <a href={path(lang)} class="brand"><span class="brand-icon" aria-hidden="true">EA</span><span>EA & Indicators</span></a>
+          <p class="muted">{t.footer}</p>
+        </div>
+        <div class="footer-links">
+          {nav.map(item => <a href={item.href}>{item.label}</a>)}
+          <a href="https://www.mql5.com/en/users/monkeyc" target="_blank" rel="noopener noreferrer">MQL5 ↗</a>
+        </div>
+      </div>
+      <div class="container footer-bottom">© 2026 EA & Indicators · {lang === 'vi' ? 'Bản kiểm thử, chưa phát hành' : 'Staging only — not released'}</div>
+    </footer>
+  </body>
+</html>

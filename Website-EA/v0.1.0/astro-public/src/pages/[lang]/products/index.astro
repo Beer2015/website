@@ -1,0 +1,12 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import { langs, forLang, products } from '../../../lib/content.mjs';
+export function getStaticPaths(){ return langs.map(lang => ({params:{lang}})); }
+const lang = Astro.params.lang;
+const t = forLang(lang);
+---
+<SiteLayout lang={lang} title={`${t.nav.products} | EA & Indicators`}>
+  <header class="page-header"><div class="container"><div class="eyebrow">MQL5 MARKET</div><h1>{t.catalogTitle}</h1><p>{t.catalogDesc}</p></div></header>
+  <section class="section"><div class="container"><div class="product-grid">{products.map(product=><ProductCard product={product} lang={lang}/>)}</div><div style="height:26px"></div><div class="warning">{t.releaseNotice}</div></div></section>
+</SiteLayout>

@@ -1,0 +1,19 @@
+---
+import { blurbs, forLang, path } from '../lib/content.mjs';
+const { product, lang = 'vi' } = Astro.props;
+const t = forLang(lang);
+const isEA = product.type === 'EA';
+---
+<article class="product-card">
+  <div class:list={['product-art', { 'product-art--ea': isEA }]} aria-hidden="true">
+    <span class="art-top">{isEA ? 'EXPERT ADVISOR' : 'MT5 INDICATOR'}</span>
+    <span class="art-shape">{isEA ? 'S / M / C' : product.slug === 'candles-signals' ? '◥ ◣ ▮' : product.slug === 'ma-cross-signals' ? '〰 ⤴' : 'OB / FVG'}</span>
+    <span class="art-bottom">MetaTrader 5 · UI illustration</span>
+  </div>
+  <div class="product-content">
+    <div class="card-meta"><span class="pill">{isEA ? t.market : t.free}</span><span>v{product.published_version}</span></div>
+    <h3><a href={path(lang, `products/${product.slug}`)}>{product.name}</a></h3>
+    <p>{blurbs[product.slug][lang]}</p>
+    <a class="text-link" href={path(lang, `products/${product.slug}`)}>{t.more} <span aria-hidden="true">→</span></a>
+  </div>
+</article>

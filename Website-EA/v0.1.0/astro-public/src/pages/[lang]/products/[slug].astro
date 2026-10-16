@@ -1,0 +1,27 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { langs, products, forLang, localizedFeatures, blurbs, path } from '../../../lib/content.mjs';
+export function getStaticPaths() {
+  return langs.flatMap(lang => products.map(product => ({params:{lang,slug:product.slug},props:{product}})));
+}
+const { product } = Astro.props;
+const lang = Astro.params.lang;
+const t = forLang(lang);
+const isEA = product.type === 'EA';
+---
+<SiteLayout lang={lang} title={`${product.name} | EA & Indicators`} description={blurbs[product.slug][lang]}>
+  <header class="page-header"><div class="container"><a class="text-link" href={path(lang,'products')}>← {t.back}</a><div style="height:23px"></div><div class="eyebrow">{isEA ? t.categoryEA : t.categoryIndicator} · MT5</div><h1>{product.name}</h1><p>{blurbs[product.slug][lang]}</p></div></header>
+  <section class="section"><div class="container detail-grid">
+    <div>
+      <div class="eyebrow">{t.highlights}</div><h2>{lang === 'vi' ? 'Tổng quan tính năng' : 'Capability overview'}</h2>
+      <ul class="details-list">{localizedFeatures(product,lang).map(f => <li>{f}</li>)}</ul>
+      <div class="callout">{t.releaseNotice}</div>
+      {isEA && <p style="margin-top:25px"><a class="text-link" href={path(lang,'research')}>{lang === 'vi' ? 'Xem nghiên cứu backtest SMC Forge' : 'Read SMC Forge research'} →</a></p>}
+      {!isEA && product.slug === 'smc-signals-alert' && <p style="margin-top:25px"><a class="text-link" href="https://monkeyc07.github.io/SMC/" target="_blank" rel="noopener noreferrer">{lang === 'vi' ? 'Hướng dẫn SMC Signals cơ bản' : 'SMC Signals basic guide'} ↗</a></p>}
+    </div>
+    <aside class="detail-side"><h3>{lang === 'vi' ? 'Phiên bản công khai' : 'Published release'}</h3><p>{t.release}: <strong>v{product.published_version}</strong></p><p>{t.updated}: {product.version_checked}</p><p>{isEA ? t.market : t.free}</p>
+      <a class="btn btn-primary" href={product.market_url} target="_blank" rel="noopener noreferrer">{isEA ? t.currentPrice : t.downloadMql5} ↗</a>
+      <p class="hint">{t.unavailable}</p>
+    </aside>
+  </div></section>
+</SiteLayout>

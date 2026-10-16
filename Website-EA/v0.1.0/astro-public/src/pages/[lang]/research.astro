@@ -1,0 +1,17 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { langs, forLang, research } from '../../lib/content.mjs';
+export function getStaticPaths(){return langs.map(lang=>({params:{lang}}));}
+const lang=Astro.params.lang;const t=forLang(lang);
+const money=n=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+---
+<SiteLayout lang={lang} title={`${t.nav.research} | EA & Indicators`}>
+  <header class="page-header"><div class="container"><div class="eyebrow">SMC FORGE / BACKTEST</div><h1>{t.researchTitle}</h1><p>{t.researchIntro}</p></div></header>
+  <section class="section"><div class="container">
+    <div class="facts"><div class="fact"><span>{t.symbol}</span><strong>{research.conditions.symbol}</strong></div><div class="fact"><span>{t.startCapital}</span><strong>${research.conditions.initial_deposit_usd.toLocaleString('en-US')}</strong></div><div class="fact"><span>{t.lot}</span><strong>{research.conditions.lot.toFixed(2)}</strong></div><div class="fact"><span>{t.period}</span><strong>01/01–30/08/2026</strong></div></div>
+    <div style="height:25px"></div>
+    <div class="table-wrap"><table><thead><tr><th>{t.profile}</th><th>{t.netProfit}</th><th>{t.pf}</th><th>{t.dd}</th><th>{t.trades}</th><th>{t.positive}</th><th>{t.preset}</th></tr></thead><tbody>{research.profiles.map(p => <tr><td><strong>{p.name}</strong></td><td>{money(p.profit_usd)}</td><td>{p.profit_factor.toFixed(2)}</td><td>{p.drawdown_pct.toFixed(2)}%</td><td>{p.trades}</td><td>{p.positive_months}/{p.total_months}</td><td><a class="text-link" href={p.preset_url} target="_blank" rel="noopener noreferrer">MQL5 ↗</a></td></tr>)}</tbody></table></div>
+    <div style="height:24px"></div><div class="warning">{t.risk}</div>
+    <p style="margin-top:27px"><a class="btn btn-outline" href={research.source_url} target="_blank" rel="noopener noreferrer">{t.source} ↗</a></p>
+  </div></section>
+</SiteLayout>

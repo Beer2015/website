@@ -1,0 +1,13 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { langs, forLang, links } from '../../lib/content.mjs';
+export function getStaticPaths(){return langs.map(lang=>({params:{lang}}));}
+const lang=Astro.params.lang;const t=forLang(lang);
+---
+<SiteLayout lang={lang} title={`${t.nav.support} | EA & Indicators`}>
+  <header class="page-header"><div class="container"><div class="eyebrow">GET STARTED</div><h1>{t.supportTitle}</h1><p>{t.supportIntro}</p></div></header>
+  <section class="section"><div class="container"><div class="steps">{t.steps.map((item,i)=><div class="step"><div class="step-num">0{i+1}</div><h3>{item[0]}</h3><p>{item[1]}</p></div>)}</div>
+    <div style="height:27px"></div><div class="warning">{t.unavailable}</div>
+    <div style="height:27px"></div><a class="btn btn-outline" href={links.author} target="_blank" rel="noopener noreferrer">{lang==='vi'?'Xem tác giả trên MQL5':'Visit author on MQL5'} ↗</a>
+  </div></section>
+</SiteLayout>
